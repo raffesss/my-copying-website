@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copy to Clipboard Example</title>
+<script>
+function copyToClipboard(text) {
+  // Create a temporary textarea element
+  const textarea = document.createElement('textarea');
+  textarea.value = text; // Assign the text to copy
+  document.body.appendChild(textarea); // Append it to the body
+  
+  // Select the text
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); // For mobile devices
+
+  // Execute the copy command
+  try {
+    var successful = document.execCommand('copy');
+    if(successful) {
+      alert("Prompt copied to clipboard."); // Display a confirmation
+    } else {
+      throw new Error('Failed to copy');
+    }
+  } catch (err) {
+    console.error('Fallback: Oops, unable to copy', err);
+  }
+
+  // Remove the temporary textarea
+  document.body.removeChild(textarea);
+}
+</script>
+</head>
+<body>
+
+<!-- The clickable element -->
+<button onclick="copyToClipboard('Your standard prompt template here')">Copy Prompt to Clipboard</button>
+
+</body>
+</html>
