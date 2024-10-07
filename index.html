@@ -3,47 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Copy to Clipboard on Page Load</title>
+<title>Copy to Clipboard Example</title>
 <script>
-function copyToClipboard(text) {
+function copyToClipboard() {
+  const text = `Title: [Provide a clear and concise title reflecting the topic of inquiry]
+
+Background: [Give a brief context or background information that can help RamGPT understand the wider scope of the question]
+
+Question: [Ask a specific and detailed question to ensure an accurate response. Feel free to include multiple aspects if needed, but keep them clearly separated.]
+
+Constraints: [Mention any particular constraints or requirements for the information being requested. For example, certain geographical limitations, specific date ranges, data sources, etc.]
+
+Expected Output: [Describe the expected format and structure of the response, including any preference for bullet points, numbered lists, or paragraphs.]
+
+Purpose: [Clarify the intended use of the information to tailor the response's tone and complexity level.]
+
+Unique Angle: [Indicate any unique perspective or angle you wish RamGPT to take when generating the response, ensuring the output is unique.]`;
+
+  // Create a temporary textarea element
   const textarea = document.createElement('textarea');
-  textarea.value = text;
-  document.body.appendChild(textarea);
+  textarea.value = text; // Assign the text to copy
+  document.body.appendChild(textarea); // Append it to the body
+  
+  // Select the text
   textarea.select();
-  textarea.setSelectionRange(0, 99999);
+  textarea.setSelectionRange(0, textarea.value.length); // Select all text
+
+  // Execute the copy command
   try {
     var successful = document.execCommand('copy');
-    alert(successful ? "Text copied to clipboard." : "Failed to copy text.");
+    if(successful) {
+      alert("Prompt copied to clipboard."); // Display a confirmation
+    } else {
+      throw new Error('Failed to copy');
+    }
   } catch (err) {
     console.error('Fallback: Oops, unable to copy', err);
   }
+
+  // Remove the temporary textarea
   document.body.removeChild(textarea);
-}
-
-// Call the function when the window is fully loaded
-window.onload = function() {
-  var textToCopy = `
-    Title: [Provide a clear and concise title reflecting the topic of inquiry]
-
-    Background: [Give a brief context or background information that can help understand the wider scope of the question]
-
-    Question: [Ask a specific and detailed question to ensure an accurate response. Include multiple aspects if needed, but keep them clearly separated.]
-
-    Constraints: [Mention any particular constraints or requirements for the information being requested. For example, certain geographical limitations, specific date ranges, data sources, etc.]
-
-    Expected Output: [Describe the expected format and structure of the response, including any preference for bullet points, numbered lists, or paragraphs.]
-
-    Purpose: [Clarify the intended use of the information to tailor the response's tone and complexity level.]
-
-    Unique Angle: [Indicate any unique perspective or angle you wish to take when generating the response, ensuring the output is unique.]
-  `;
-  copyToClipboard(textToCopy.trim());
 }
 </script>
 </head>
 <body>
 
-<!-- Content can go here if needed -->
+<!-- The clickable element -->
+<button onclick="copyToClipboard()">Copy Prompt to Clipboard</button>
 
 </body>
 </html>
