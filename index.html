@@ -3,12 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Copy to Clipboard Example</title>
+<title>Copy to Clipboard on Load Example</title>
 <script>
-function copyToClipboard() {
-  const text = `Title: [Provide a clear and concise title reflecting the topic of inquiry]
+function copyToClipboard(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body.appendChild(textarea);
 
-Background: [Give a brief context or background information that can help RamGPT understand the wider scope of the question]
+  textarea.select();
+  textarea.setSelectionRange(0, 99999);
+
+  try {
+    const successful = document.execCommand('copy');
+    const msg = successful ? 'Successful' : 'Unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.error('Failed to copy', err);
+  }
+
+  document.body.removeChild(textarea);
+}
+
+// This will run the copy function when the window is fully loaded
+window.onload = function() {
+  copyToClipboard(`Title: [Provide a clear and concise title reflecting the topic of inquiry]
+
+Background: [Give a brief context or background information that can help understand the wider scope of the question]
 
 Question: [Ask a specific and detailed question to ensure an accurate response. Feel free to include multiple aspects if needed, but keep them clearly separated.]
 
@@ -18,38 +38,11 @@ Expected Output: [Describe the expected format and structure of the response, in
 
 Purpose: [Clarify the intended use of the information to tailor the response's tone and complexity level.]
 
-Unique Angle: [Indicate any unique perspective or angle you wish RamGPT to take when generating the response, ensuring the output is unique.]`;
-
-  // Create a temporary textarea element
-  const textarea = document.createElement('textarea');
-  textarea.value = text; // Assign the text to copy
-  document.body.appendChild(textarea); // Append it to the body
-  
-  // Select the text
-  textarea.select();
-  textarea.setSelectionRange(0, textarea.value.length); // Select all text
-
-  // Execute the copy command
-  try {
-    var successful = document.execCommand('copy');
-    if(successful) {
-      alert("Prompt copied to clipboard."); // Display a confirmation
-    } else {
-      throw new Error('Failed to copy');
-    }
-  } catch (err) {
-    console.error('Fallback: Oops, unable to copy', err);
-  }
-
-  // Remove the temporary textarea
-  document.body.removeChild(textarea);
-}
+Unique Angle: [Indicate any unique perspective or angle you wish to take when generating the response, ensuring the output is unique.]`);
+};
 </script>
 </head>
 <body>
-
-<!-- The clickable element -->
-<button onclick="copyToClipboard()">Copy Prompt to Clipboard</button>
-
+<!-- Content of your website -->
 </body>
 </html>
