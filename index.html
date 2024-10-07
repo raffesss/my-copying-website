@@ -35,7 +35,22 @@ function copyToClipboard(text) {
 <body>
 
 <!-- The clickable element -->
-<button onclick="copyToClipboard('Your standard prompt template here')">Copy Prompt to Clipboard</button>
+<button onclick="copyToClipboard('
+                                 Title: [Provide a clear and concise title reflecting the topic of inquiry]
+
+Background: [Give a brief context or background information that can help RamGPT understand the wider scope of the question]
+
+Question: [Ask a specific and detailed question to ensure an accurate response. Feel free to include multiple aspects if needed, but keep them clearly separated.]
+
+Constraints: [Mention any particular constraints or requirements for the information being requested. For example, certain geographical limitations, specific date ranges, data sources, etc.]
+
+Expected Output: [Describe the expected format and structure of the response, including any preference for bullet points, numbered lists, or paragraphs.]
+
+Purpose: [Clarify the intended use of the information to tailor the response's tone and complexity level.]
+
+Unique Angle: [Indicate any unique perspective or angle you wish RamGPT to take when generating the response, ensuring the output is unique.]
+                                 
+                                 ')">Copy Prompt to Clipboard</button>
 
 </body>
 </html>
