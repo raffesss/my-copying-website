@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copy to Clipboard Example</title>
+<script>
+function copyToClipboard() {
+  const text = `Title: [Your Query Regarding the Prompt]
+
+Background: [Provide a brief context about your project. Include information such as the type of infrastructure, its location, and any relevant details that might be impacting your query.]
+
+Question: [Ask a detailed and focused question related to bridges or infrastructure. If your query has multiple layers, separate them clearly. For example, questions on structural integrity, materials, design approaches, or environmental considerations.]
+
+Constraints: [Detail any specific constraints such as environmental regulations, budget limits, geographical conditions, design life requirements, etc., that are applicable to your question.]
+
+Expected Output: [Explain how you would like the information to be structured. Do you prefer a concise list, a detailed report, or a summary?]
+
+Purpose: [Explain the reason for your query. Are you in the planning phase, in need of a problem-solving approach, or looking for innovative solutions for an ongoing project? This will help tailor the response to be most effective for your needs.]
+
+Unique Angle: [Describe any specific perspectives or creative angles you want the response to incorporate. This could range from historical context, cutting-edge technology in bridge design, sustainability practices, or any other innovative aspects.]
+
+---
+
+**RamGPT Creative Response Guidelines:**
+
+1. **Insightfulness**: Dig deep to provide insights that are not just technical but also capture the essence of the ever-evolving field of bridge and infrastructure engineering.
+2. **Novelty**: Even if discussing well-known concepts, introduce a fresh perspective or little-known facts that might surprise even the experienced professionals.
+3. **Engagement**: Craft the response in a manner that not only informs but also intrigues, encouraging further exploration and curiosity about the subject.
+4. **Relevance**: Ensure that the creative elements do not overtake the practical and applicable nature of the information provided.
+5. **Visual Element**: If possible, include metaphoric imagery that complements the textual information, reinforcing the message and making it more memorable.`;
+
+  // Create a temporary textarea element
+  const textarea = document.createElement('textarea');
+  textarea.value = text; // Assign the text to copy
+  document.body.appendChild(textarea); // Append it to the body
+  
+  // Select the text
+  textarea.select();
+  textarea.setSelectionRange(0, textarea.value.length); // Select all text
+
+  // Execute the copy command
+  try {
+    var successful = document.execCommand('copy');
+    if(successful) {
+      alert("Prompt copied to clipboard."); // Display a confirmation
+    } else {
+      throw new Error('Failed to copy');
+    }
+  } catch (err) {
+    console.error('Fallback: Oops, unable to copy', err);
+  }
+
+  // Remove the temporary textarea
+  document.body.removeChild(textarea);
+}
+</script>
+</head>
+<body>
+
+<!-- The clickable element -->
+<button onclick="copyToClipboard()">Copy Prompt to Clipboard</button>
+
+</body>
+</html>
