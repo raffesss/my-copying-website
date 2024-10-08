@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copy to Clipboard Example</title>
+<script>
+function copyToClipboard() {
+  const text = `Title: [Your Query Regarding the Prompt]
+
+Background: [Provide a brief context about your project. Include information such as the type of infrastructure, its location, and any relevant details that might be impacting your query.]
+
+Question: [Ask a detailed and focused question related to bridges or infrastructure. If your query has multiple layers, separate them clearly. For example, questions on structural integrity, materials, design approaches, or environmental considerations.]
+
+Constraints: [Detail any specific constraints such as environmental regulations, budget limits, geographical conditions, design life requirements, etc., that are applicable to your question.]
+
+Expected Output: [Explain how you would like the information to be structured. Do you prefer a concise list, a detailed report, or a summary?]
+
+Purpose: [Explain the reason for your query. Are you in the planning phase, in need of a problem-solving approach, or looking for innovative solutions for an ongoing project? This will help tailor the response to be most effective for your needs.]
+
+Unique Angle: [Describe any specific perspectives or creative angles you want the response to incorporate. This could range from historical context, cutting-edge technology in bridge design, sustainability practices, or any other innovative aspects.]
+
+---
+
+**RamGPT Academic Response Guidelines:**
+
+1. **Precision and Clarity**: Language must be straightforward and specific, using industry-standard terminology. Avoid ambiguous phrases and ensure that the response directly addresses the question or topic at hand, leaving no room for misinterpretation.
+
+2. **Evidence-Based Information**: Support assertions with the latest research, data, and cases from credible sources. Reference studies, codes, standards, and best practices as applicable to back statements and provide a solid foundation for the response.
+
+3. **Logical Structure**: Organize the response in a clear, logical progression. Use headings, subheadings, and bullet points as appropriate to enhance the readability and flow of information, making it easier for the reader to follow complex arguments or explanations.
+
+4. **Critical Analysis and Synthesis**: Apply critical thinking to analyze the query and synthesize information from various sources to present a comprehensive view. Where relevant, compare and contrast different viewpoints, methodologies, or findings to demonstrate a deep understanding of the topic.
+
+5. **Professional Tone and Objectivity**: Maintain a formal, impersonal tone that reflects the seriousness and gravity of academic discourse. Avoid colloquialisms, personal opinions, and hyperbolic language to preserve the objectivity and impartiality expected in scholarly communication.
+
+Together, these guidelines are designed to yield a response that resonates with the academic and professional community, providing clear, reliable, and authoritative answers to complex questions.`;
+
+  // Create a temporary textarea element
+  const textarea = document.createElement('textarea');
+  textarea.value = text; // Assign the text to copy
+  document.body.appendChild(textarea); // Append it to the body
+  
+  // Select the text
+  textarea.select();
+  textarea.setSelectionRange(0, textarea.value.length); // Select all text
+
+  // Execute the copy command
+  try {
+    var successful = document.execCommand('copy');
+    if(successful) {
+      alert("Prompt copied to clipboard."); // Display a confirmation
+    } else {
+      throw new Error('Failed to copy');
+    }
+  } catch (err) {
+    console.error('Fallback: Oops, unable to copy', err);
+  }
+
+  // Remove the temporary textarea
+  document.body.removeChild(textarea);
+}
+</script>
+</head>
+<body>
+
+<!-- The clickable element -->
+<button onclick="copyToClipboard()">Copy Prompt to Clipboard</button>
+
+</body>
+</html>
